@@ -3,10 +3,13 @@ function [images, eyes] = readData(path)
     eyesDir = dir(strcat(path, '*.eye'));
     n = length(imgsDir);
     assert(n == length(eyesDir), 'Different number of images and eyes');
-    images = zeros([n,100,100]);
+    
+    resize = 250;
+    images = zeros([resize, resize, n]);
     eyes = zeros([n, 4]);
+    
     % Images
-    for i = 1 : n
+    for i = 1:n
          imgName = imgsDir(i).name;
          img = imread(strcat(path, imgName));
          s = size(img);
@@ -14,10 +17,11 @@ function [images, eyes] = readData(path)
          if l == 3
              img = rgb2gray(img);
          end
-         images(i,:,:) = imresize(img,[100 100]);
+         images(:, :, i) = imresize(img, [resize, resize]);
     end
+    
     % Eyes
-    for i = 1 : n
+    for i = 1:n
        eyeName = eyesDir(i).name;
        eyeID = fopen(strcat(path, eyeName), 'r');
        eyes(i, 1:4) = fscanf(eyeID, '#LX LY RX RY %d %d %d %d');
