@@ -4,8 +4,9 @@ function [leftEye, rightEye] = getEyesInImage(image, eyesInfo)
     rightPos = eyesPos(2, :);
     
     dist = pdist(eyesPos, 'euclidean');
-    subSize = ceil(0.65 * dist / 2);
+    rectSize = 0.65 * dist;
+    halfSize = rectSize / 2;
     
-    leftEye = imcrop(image, [leftPos - subSize, subSize, subSize]);
-    rightEye = imcrop(image, [rightPos - subSize, subSize, subSize]);
+    leftEye = imcrop(image, [leftPos - halfSize, rectSize, rectSize]);
+    rightEye = imcrop(image, [rightPos - halfSize, rectSize, rectSize]);
 end
