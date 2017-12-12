@@ -10,11 +10,11 @@ function [images] = getNoEyesInImage2(image, eyesInfo, resize, n)
     images = zeros([resize, resize, n]);
     
     for i = 1:n
-        ranges = [0, leftPos(1) ;
-                  leftPos(1) + rectSize, rightPos(1) ;
-                  rightPos(1) + rectSize, length(image)];
+        ranges = [0, rightPos(1) ;
+                  rightPos(1) + rectSize, leftPos(1) ;
+                  leftPos(1) + rectSize, length(image)];
         pos = randomPositionInRange(ranges, rectSize);
-        image = imcrop(image, [pos - halfSize, rectSize, rectSize]);
-        images(:, :, i) = imresize(image, [resize, resize]);
+        subImage = imcrop(image, [pos, rectSize, rectSize]);
+        images(:, :, i) = imresize(subImage, [resize, resize]);
     end
 end

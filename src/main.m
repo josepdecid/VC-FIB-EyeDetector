@@ -1,6 +1,6 @@
 path = strcat(pwd, '/dataset/');
 
-[images, eyes] = readData(path);
-[trainset, testset] = splitData(images, eyes, 80);
+[images, eyesPos] = readData(path);
+[trainset, testset] = splitData(images, eyesPos, 80);
 
-eyes = getEyes(trainset, 90);
+[eyes, noEyes] = getEyes(trainset, 10);

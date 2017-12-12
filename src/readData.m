@@ -30,7 +30,7 @@ function [images, eyes] = readData(path)
        eyeID = fopen(strcat(path, eyeName), 'r');
        eyes(i, 1:4) = fscanf(eyeID, '#LX LY RX RY %d %d %d %d');
        for j = 1:4
-           eyes(i, j) = ceil(eyes(i, j) * resize / rescale(j));
+           eyes(i, j) = eyes(i, j) * resize / rescale(j);
        end
        fclose(eyeID);
     end

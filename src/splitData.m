@@ -1,8 +1,8 @@
-function [trainset, testset] = splitData(images, eyes, ratio)
+function [trainset, testset] = splitData(images, eyesPos, ratio)
     n = length(images);
     nPerm = randperm(n);
     imagesRand = images(:, :, nPerm);
-    eyesRand = eyes(nPerm, :);
+    eyesRand = eyesPos(nPerm, :);
     split = round(ratio * n / 100);
    
     trainset = { imagesRand(:, :, 1:split), eyesRand(1:split, :) };  
