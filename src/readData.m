@@ -7,6 +7,7 @@ function [images, eyes] = readData(path)
     height = 286; % Dataset img height
     width = 384; % Dataset img width
     rescale = [width, height, width, height];
+    
     resize = 250; % Size of reduced image
     images = zeros([resize, resize, n]);
     eyes = zeros([n, 4]);
