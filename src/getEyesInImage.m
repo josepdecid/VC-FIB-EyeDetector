@@ -1,4 +1,4 @@
-function [leftEye, rightEye] = getEyesInImage(image, eyesInfo, size)
+function [leftEye, rightEye] = getEyesInImage(image, eyesInfo, resize)
     eyesPos = vec2mat(eyesInfo, 2);
     dist = pdist(eyesPos, 'euclidean');
     rectSize = 0.65 * dist;
@@ -11,6 +11,6 @@ function [leftEye, rightEye] = getEyesInImage(image, eyesInfo, size)
     rightEye = imcrop(image, [rightPos - halfSize, rectSize, rectSize]);
     
     % Same size for all eyes
-    leftEye = imresize(leftEye, [size, size]); 
-    rightEye = imresize(rightEye, [size, size]);
+    leftEye = imresize(leftEye, [resize, resize]); 
+    rightEye = imresize(rightEye, [resize, resize]);
 end

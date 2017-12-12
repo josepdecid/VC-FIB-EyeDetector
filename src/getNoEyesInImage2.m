@@ -1,20 +1,20 @@
-function [images] = getNoEyesInImage2(image, eyesInfo, size, n)
+function [images] = getNoEyesInImage2(image, eyesInfo, resize, n)
     eyesPos = vec2mat(eyesInfo, 2);
     dist = pdist(eyesPos, 'euclidean');
-    rectSize = 0.65 * dist;
-    halfSize = rectSize / 2;
+    rectSize = ceil(0.65 * dist);
+    halfSize = ceil(rectSize / 2);
     
     leftPos = eyesPos(1, :) - halfSize;
     rightPos = eyesPos(2, :) - halfSize;
     
-    images = zeros([size, size, n]);
+    images = zeros([resize, resize, n]);
     
     for i = 1:n
         ranges = [0, leftPos(1) ;
                   leftPos(1) + rectSize, rightPos(1) ;
-                  rightPos(1), length(image)];
+                  rightPos(1) + rectSize, length(image)];
         pos = randomPositionInRange(ranges, rectSize);
         image = imcrop(image, [pos - halfSize, rectSize, rectSize]);
-        images(:, :, i) = imresize(image, [size, size]);
+        images(:, :, i) = imresize(image, [resize, resize]);
     end
 end
