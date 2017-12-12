@@ -1,1 +1,0 @@
-pred = trainPredictor(eyes, noEyes);

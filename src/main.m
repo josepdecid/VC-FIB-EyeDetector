@@ -1,2 +1,3 @@
+clearvars
 dataExtraction
-classification
+prediction
