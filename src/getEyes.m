@@ -14,7 +14,8 @@ function [eyes, noEyes] = getEyes(dataset, ratio)
         eyes(:, :, 2*i - 1) = left;
         eyes(:, :, 2*i) = right;
         
-        subImages = getNoEyesInImage2(images(:, :, i), eyesData(i, :), resize, noEyesPerImage);
+        subImages = getNoEyesInImage(images(:, :, i), eyesData(i, :), resize, noEyesPerImage);
+        % TODO: Sense bucle
         for j = 1:noEyesPerImage
            noEyes(:,:, noEyesPerImage*(i-1) + j) = subImages(:, :, j);
         end
