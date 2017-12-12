@@ -4,7 +4,10 @@ function [images, eyes] = readData(path)
     n = length(imgsDir);
     assert(n == length(eyesDir), 'Different number of images and eyes');
     
-    resize = 250;
+    height = 286; % Dataset img height
+    width = 384; % Dataset img width
+    rescale = [width, height, width, height];
+    resize = 250; % Size of reduced image
     images = zeros([resize, resize, n]);
     eyes = zeros([n, 4]);
     
@@ -25,5 +28,9 @@ function [images, eyes] = readData(path)
        eyeName = eyesDir(i).name;
        eyeID = fopen(strcat(path, eyeName), 'r');
        eyes(i, 1:4) = fscanf(eyeID, '#LX LY RX RY %d %d %d %d');
+       for j = 1:4
+           eyes(i, j) = eyes(i, j) * resize / rescale(j);
+       end
+       fclose(eyeID);
     end
 end
