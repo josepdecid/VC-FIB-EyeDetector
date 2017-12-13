@@ -1,23 +1,23 @@
-function [eyes, noEyes] = getEyes(dataset, ratio)
+function [eyes, noEyes] = getEyes(dataset, ratio, dims)
     images = dataset{1};
     eyesData = dataset{2};
    
-    resize = 64;
     n = length(images);
-    eyes = zeros([resize, resize, 2*n]);
+    eyes = zeros([dims.subImgSize, dims.subImgSize, 2*n]);
     
     noEyesPerImage = ceil(2*(100 - ratio) / ratio);
-    noEyes = zeros([resize, resize, noEyesPerImage * n]);
+    noEyes = zeros([dims.subImgSize, dims.subImgSize, noEyesPerImage * n]);
     
     for i = 1:n
-        [left, right] = getEyesInImage(images(:, :, i), eyesData(i, :), resize);
+        currentImg = images(:, :, i);
+        currentEyes = eyesData(i, :);
+        currentPos = noEyesPerImage*(i-1) + 1;
+        % Eyes
+        [left, right] = getEyesInImage(currentImg, currentEyes, dims.subImgSize);
         eyes(:, :, 2*i - 1) = left;
         eyes(:, :, 2*i) = right;
-        
-        subImages = getNoEyesInImage(images(:, :, i), eyesData(i, :), resize, noEyesPerImage);
-        % TODO: Sense bucle
-        for j = 1:noEyesPerImage
-           noEyes(:,:, noEyesPerImage*(i-1) + j) = subImages(:, :, j);
-        end
+        % No Eyes
+        subImages = getNoEyesInImage(currentImg, currentEyes, dims.subImgSize, noEyesPerImage);
+        noEyes(:,:, currentPos:currentPos + noEyesPerImage - 1) = subImages(:, :, :);
     end
 end

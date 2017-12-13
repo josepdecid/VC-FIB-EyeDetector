@@ -10,7 +10,6 @@ function [leftEye, rightEye] = getEyesInImage(image, eyesInfo, resize)
     leftEye = imcrop(image, [leftPos, rectSize, rectSize]);
     rightEye = imcrop(image, [rightPos, rectSize, rectSize]);
     
-    % Same size for all eyes
     leftEye = imresize(leftEye, [resize, resize]); 
     rightEye = imresize(rightEye, [resize, resize]);
 end

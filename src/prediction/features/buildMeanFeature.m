@@ -1,4 +1,4 @@
-function [Tbl] = buildFeatureTable(eyes, noEyes)
+function [Tbl] = buildMeanFeature(eyes, noEyes)
     [r, c] = size(eyes(:, :, 1));
     totalLength = length(eyes) + length(noEyes);
     
