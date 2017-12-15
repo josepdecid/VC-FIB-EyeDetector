@@ -1,10 +1,15 @@
 pred = trainPredictor(eyes, noEyes);
 
+trainImages = trainset{1};
 testImages = testset{1};
-[labels, scores] = predictImages(pred, trainset{1}(:, :, 42));
 
-[~, pos] = max(scores);
-i = floor(pos(1) / (250-30));
-j = mod(pos(1), (250-30));
+[~, scores] = predictImages(pred, trainImages(:, :, 123));
 
-imshow(insertShape(uint8(trainset{1}(:, :, 42)), 'rectangle', [i j 30 30], 'LineWidth', 1), []);
+eyeScores = scores(:, 1);
+[~, pos1] = max(eyeScores);
+i1 = floor(pos1 / (250-30));
+j1 = mod(pos1, (250-30));
+
+I = uint8(trainImages(:, :, 123));
+I = insertShape(I, 'rectangle', [i1 j1 30 30], 'LineWidth', 1);
+imshow(I, []);
