@@ -1,4 +1,4 @@
-function [images] = getNoEyesInImage2(image, eyesInfo, resize, n)
+function [images] = getNoEyesInImage(image, eyesInfo, resize, n)
     eyesPos = vec2mat(eyesInfo, 2);
     dist = pdist(eyesPos, 'euclidean');
     rectSize = ceil(0.65 * dist);
@@ -32,6 +32,7 @@ function [images] = getNoEyesInImage2(image, eyesInfo, resize, n)
                 indexX(j, k) = NaN;
                 indexY(j, k) = NaN;
             end
+            
         end
     end
     indexX = indexX(~isnan(indexX));
