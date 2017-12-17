@@ -5,43 +5,23 @@ function [images] = getNoEyesInImage(image, eyesInfo, resize, n)
     halfSize = ceil(rectSize / 2);
     
     [r, c] = size(image);
-    leftPos = eyesPos(1, :) - halfSize - rectSize;
-    rightPos = eyesPos(2, :) - halfSize - rectSize;
+    lp = eyesPos(1, :) - halfSize - rectSize;
+    rp = eyesPos(2, :) - halfSize - rectSize;
+    off = 2 * rectSize;
     
     images = zeros([resize, resize, n]);
     
-    % TODO: Menys cutre v
-    indexX = zeros([r, c]);
-    indexY = zeros([r, c]);
-    for j = 1:r
-       for k = 1:c
-           indexX(j, k) = j;
-           indexY(j, k) = k;
-       end
-    end
-    for j = 1:r
-        for k = 1:c
-            ix = indexX(j, k); iy = indexY(j, k);
-            ex = leftPos(1); ey = leftPos(2);
-            if (ix >= ex && ix <= ex + 2*rectSize && iy >= ey && iy <= ey + 2*rectSize)
-                indexX(j, k) = NaN;
-                indexY(j, k) = NaN;
-            end
-            ex = rightPos(1); ey = rightPos(2);
-            if (ix >= ex && ix <= ex + 2*rectSize && iy >= ey && iy <= ey + 2*rectSize)
-                indexX(j, k) = NaN;
-                indexY(j, k) = NaN;
-            end
-            
-        end
-    end
-    indexX = indexX(~isnan(indexX));
-    indexY = indexY(~isnan(indexY));
-    % TODO: Menys cutre ^
-    
     for i = 1:n
-        pos = [indexX(randi(length(indexX))), indexY(randi(length(indexY)))];
-        subImage = imcrop(image, [pos, rectSize, rectSize]);
+        x = randi(r - rectSize); y = randi(c - rectSize);
+        while posInsideEye(x, y, lp, off) || posInsideEye(x, y, rp, off)
+            x = randi(r - rectSize); y = randi(c - rectSize);
+        end
+        subImage = imcrop(image, [x, y, rectSize, rectSize]);
         images(:, :, i) = imresize(subImage, [resize, resize]);
     end
+    
+    function [isInside] = posInsideEye(px, py, pe, offset)
+       isInside = px >= pe(1) && px <= pe(1) + offset ...
+                  && py >= pe(2) && py <= pe(2) + offset;
+    end 
 end

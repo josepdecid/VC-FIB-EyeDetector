@@ -14,5 +14,5 @@ dimensions = struct(    ...
 
 % Phases
 dataExtraction
-%prediction
-%results
+prediction
+results
