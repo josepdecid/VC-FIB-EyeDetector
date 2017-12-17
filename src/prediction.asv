@@ -12,9 +12,9 @@ predictedPositions = zeros(length(testImages), 4);
 %    predictedPositions(i, :) = [pos1, pos2];
 %end
 
-[~, scores] = predictImages(pred, testImages(:, :, 99), imageSize, rectSize);
+[~, scores] = predictImages(pred, testImages(:, :, 301), imageSize, rectSize);
 [pos1, pos2] = getEyesFromScores(scores(:, 1), imageSize, rectSize);
-I = uint8(squeeze(testImages(:, :, 99)));
+I = uint8(squeeze(testImages(:, :, 31)));
 I = insertShape(I, 'rectangle', [pos1, rectSize, rectSize], 'LineWidth', 1);
 I = insertShape(I, 'rectangle', [pos2, rectSize, rectSize], 'LineWidth', 1);
 imshow(I);
