@@ -5,6 +5,6 @@ function [pred] = trainPredictor(eyes, noEyes)
     LabelsNoEyes = repmat('N', 1, length(noEyes));
     Labels = horzcat(LabelsEyes, LabelsNoEyes);
     
-    pred = TreeBagger(150, Tbl, Labels');
+    pred = TreeBagger(100, Tbl, Labels');
 end
 

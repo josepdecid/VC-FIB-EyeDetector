@@ -1,14 +1,14 @@
-%pred = trainPredictor(eyes, noEyes);
+pred = trainPredictor(eyes, noEyes);
 
 rectSize = 30;
 rectSizeVec = [rectSize, rectSize];
 testImages = testset{1};
 
 for i = 1:length(testImages)
-    [~, scores] = predictImages(pred, testImages(:, :, i), rectSize);
+    [~, scores] = predictImages(pred, testImages(:, :, i), imageSize, rectSize);
 
     eyeScores = scores(:, 1);
-    [pos1, pos2] = getEyesFromScores(eyeScores, rectSize);
+    [pos1, pos2] = getEyesFromScores(eyeScores, imageSize, rectSize);
 
     I = uint8(squeeze(testImages(:, :, i)));
     I = insertShape(I, 'rectangle', [pos1, rectSizeVec], 'LineWidth', 1);
