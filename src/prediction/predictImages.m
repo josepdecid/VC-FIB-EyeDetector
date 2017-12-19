@@ -1,12 +1,10 @@
-function [label, scores] = predictImages(pred, image, imageSize, rectSize, steps)
-    % TODO: 10 subdivisions (HELL 2 U ARBITRARI) Es pot fer amb un metode?
-    resize = 64;
-    subImages = zeros([resize, resize, ((imageSize - rectSize)/steps)^2]);
+function [label, scores] = predictImages(pred, image, dims, rectSize)
+    subImages = zeros([dims.subImgSize, dims.subImgSize, ((dims.imgSize - rectSize)/(dims.steps))^2]);
     k = 1;
-    for i = 1:steps:(imageSize - rectSize)
-        for j = 1:steps:(imageSize - rectSize)
+    for i = 1:(dims.steps):(dims.imgSize - rectSize)
+        for j = 1:(dims.steps):(dims.imgSize - rectSize)
             subImage = imcrop(image, [i, j, rectSize, rectSize]);
-            subImages(:, :, k) = imresize(subImage, [resize, resize]);
+            subImages(:, :, k) = imresize(subImage, [dims.subImgSize, dims.subImgSize]);
             k = k + 1;
         end
     end

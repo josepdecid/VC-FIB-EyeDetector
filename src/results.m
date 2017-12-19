@@ -3,13 +3,13 @@ for i = 1:length(testImages)
     dist = pdist(eyesPos, 'euclidean');
     rectSize = 0.65 * dist;
     halfSize = rectSize / 2;
-    
-    eyePos = eyePos + halfSize;
+    eyesPos = eyesPos - halfSize;
 
-    I = uint8(squeeze(images(:, :, i)));
-    shape = [eyesPos(1), eyesPos(2), rectSize, rectSize];
+    I = uint8(squeeze(testImages(:, :, i)));
+    shape = [eyesPos(1, 1), eyesPos(1, 2), rectSize, rectSize];
     I = insertShape(I, 'rectangle', shape, 'LineWidth', 1);
-    shape = [eyesPos(3), eyesPos(4), rectSize, rectSize];
+    shape = [eyesPos(2, 1), eyesPos(2, 2), rectSize, rectSize];
     I = insertShape(I, 'rectangle', shape, 'LineWidth', 1);
     imshow(I);
+    pause(.5);
 end
