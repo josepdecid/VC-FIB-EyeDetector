@@ -13,8 +13,8 @@ function [pos1, pos2] = getEyesFromScores(scores, dims, rectSize)
         p2 = positions(p);
         i2 = floor(p2 / (dims.imgSize - rectSize)) * dims.steps * dims.steps;
         j2 = mod(p2, (dims.imgSize - rectSize) / dims.steps) * dims.steps;
-        if (i2 < i1 - rectSize/3 || i2 > i1 + rectSize/3) || ...
-           (j2 < j1 - rectSize/3 || j2 > j1 + rectSize/3)
+        if (i2 < i1 - rectSize/3 || i2 > i1 + rectSize/3) && ...
+           (j2 > j1 - rectSize/3 && j2 < j1 + rectSize/3)
             pos2 = [i2, j2];
            break; 
         end
