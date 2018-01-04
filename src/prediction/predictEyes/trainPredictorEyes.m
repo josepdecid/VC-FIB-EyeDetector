@@ -1,5 +1,5 @@
-function [pred] = trainPredictor(eyes, noEyes)
-    Tbl = joinFeatures(eyes, noEyes);
+function [pred] = trainPredictorEyes(eyes, noEyes)
+    Tbl = joinFeaturesEyes(eyes, noEyes);
     
     LabelsEyes = repmat('E', 1, length(eyes));
     LabelsNoEyes = repmat('N', 1, length(noEyes));

@@ -1,4 +1,4 @@
-function [label, scores] = predictImages(pred, image, dims, rectSize)
+function [label, scores] = predictEyes(pred, image, dims, rectSize)
     subImages = zeros([dims.subImgSize, dims.subImgSize, ((dims.imgSize - rectSize)/(dims.steps))^2]);
     k = 1;
     for i = 1:(dims.steps):(dims.imgSize - rectSize)
@@ -9,7 +9,7 @@ function [label, scores] = predictImages(pred, image, dims, rectSize)
         end
     end
     
-    Tbl = joinFeatures(subImages, []);
+    Tbl = joinFeaturesEyes(subImages, []);
     [label, scores] = predict(pred, Tbl);
 end
 

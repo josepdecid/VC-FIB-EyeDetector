@@ -1,8 +1,14 @@
-function [images, eyes] = readData(path, dims)
+function [images, eyes, looksInfo] = readData(path, dims)
     imgsDir = dir(strcat(path, '*.pgm'));
     eyesDir = dir(strcat(path, '*.eye'));
+    looksPath = strcat(path, 'mira.txt');
     n = length(imgsDir);
     assert(n == length(eyesDir), 'Different number of images and eyes');
+    
+    % Looks
+    looksID = fopen(looksPath, 'r');
+    looksInfo = fscanf(looksID, '%d');
+    assert(n == length(looksInfo), 'Different number of images and look info');
     
     rescale = [dims.width, dims.height, dims.width, dims.height];
     images = zeros([dims.imgSize, dims.imgSize, n]);

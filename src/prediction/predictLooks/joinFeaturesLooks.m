@@ -1,0 +1,6 @@
+function [features] = joinFeaturesLooks(looks, noLooks)
+    features = horzcat(                             ...
+                    buildMeanFeature(looks, noLooks) ...
+               );
+end
+

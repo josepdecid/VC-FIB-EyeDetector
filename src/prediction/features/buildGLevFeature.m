@@ -1,13 +1,13 @@
-function [Tbl] = buildGLevFeature(eyes, noEyes)
-    totalLength = length(eyes) + length(noEyes);
+function [Tbl] = buildGLevFeature(imageSet1, imageSet2)
+    totalLength = size(imageSet1, 3) + length(imageSet2);
     
     Tbl = zeros([totalLength, 256]);
     
-    for i = 1:length(eyes)
-       Tbl(i, :) = imhist(eyes(:, :, i))';
+    for i = 1:size(imageSet1, 3)
+       Tbl(i, :) = imhist(imageSet1(:, :, i))';
     end
-    for i = 1:length(noEyes)
-       Tbl(i + length(eyes), :) = imhist(noEyes(:, :, i))';
+    for i = 1:length(imageSet2)
+       Tbl(i + size(imageSet1, 3), :) = imhist(imageSet2(:, :, i))';
     end
 end
 
