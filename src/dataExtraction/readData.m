@@ -1,7 +1,7 @@
 function [images, eyes, looksInfo] = readData(path, dims)
     imgsDir = dir(strcat(path, '*.pgm'));
     eyesDir = dir(strcat(path, '*.eye'));
-    looksPath = strcat(path, 'mira.txt');
+    looksPath = strcat(path, 'looking.txt');
     n = length(imgsDir);
     assert(n == length(eyesDir), 'Different number of images and eyes');
     
