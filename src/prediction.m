@@ -1,5 +1,7 @@
-predEyes = trainPredictorEyes(eyes, noEyes);
-predLooks = trainPredictorLooks(looks, noLooks);
+% predEyes = trainPredictorEyes(eyes, noEyes);
+% predLooks = trainPredictorLooks(looks, noLooks);
+
+predEyes = classifier;
 
 rectSize = 30;
 
@@ -13,6 +15,6 @@ for i = 1:10
     [pos1, pos2] = getEyesFromScores(scores(:, 1), dimensions, rectSize);
     predictedPositions(i, :) = [pos1, pos2];
     
-    looksPrediction(i) = predictLooks(predLooks, testImages(:, :, i), ...
-        testEyesPos(i, :), dimensions.subImgSize);
+    %looksPrediction(i) = predictLooks(predLooks, testImages(:, :, i), ...
+    %    testEyesPos(i, :), dimensions.subImgSize);
 end

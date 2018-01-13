@@ -5,6 +5,6 @@ function [classifier] = trainPredictorEyes(eyes, noEyes)
     LabelsNoEyes = repmat('N', 1, length(noEyes));
     Labels = horzcat(LabelsEyes, LabelsNoEyes);
     
-    classifier = randomForest(Tbl, Labels');
+    classifier = svm(Tbl, Labels');
 end
 

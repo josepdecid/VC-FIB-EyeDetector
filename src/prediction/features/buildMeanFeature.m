@@ -10,5 +10,11 @@ function [Tbl] = buildMeanFeature(imageSet1, imageSet2)
     for i = 1:length(imageSet2)
        Tbl(i + size(imageSet1, 3), :) = meansRowCol(imageSet2(:, :, i));
     end
+    
+    function [m] = meansRowCol(image)
+        meanByRows = mean(image, 2)';
+        meanByCols = mean(image, 1);
+        m = horzcat(meanByRows, meanByCols);
+    end
 end
 

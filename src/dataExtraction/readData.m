@@ -1,14 +1,9 @@
 function [images, eyes, looksInfo] = readData(path, dims)
     imgsDir = dir(strcat(path, '*.pgm'));
     eyesDir = dir(strcat(path, '*.eye'));
-    looksPath = strcat(path, 'looking.txt');
+    lookDir = strcat(path, 'looking.txt');
     n = length(imgsDir);
     assert(n == length(eyesDir), 'Different number of images and eyes');
-    
-    % Looks
-    looksID = fopen(looksPath, 'r');
-    looksInfo = fscanf(looksID, '%d');
-    assert(n == length(looksInfo), 'Different number of images and look info');
     
     rescale = [dims.width, dims.height, dims.width, dims.height];
     images = zeros([dims.imgSize, dims.imgSize, n]);
@@ -33,4 +28,9 @@ function [images, eyes, looksInfo] = readData(path, dims)
         end
         fclose(eyeID);
     end
+    
+    % Looking
+    looksID = fopen(lookDir, 'r');
+    looksInfo = fscanf(looksID, '%d');
+    assert(n == length(looksInfo), 'Different number of images and look info');
 end
