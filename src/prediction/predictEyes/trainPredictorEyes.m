@@ -5,6 +5,14 @@ function [classifier] = trainPredictorEyes(eyes, noEyes)
     LabelsNoEyes = repmat('N', 1, length(noEyes));
     Labels = horzcat(LabelsEyes, LabelsNoEyes);
     
-    classifier = svm(Tbl, Labels');
+    % [coeffs, scores, ~, ~, explained] = pca(Tbl);
+    % acc = explained(1);
+    % for i = 2:length(explained)
+    %     acc = acc + explained(i);
+    %     if acc > 95.0; break; end
+    % end
+    % Tbl = scores(:, 1:i);
+    
+    classifier = randomForest(Tbl, Labels');
 end
 

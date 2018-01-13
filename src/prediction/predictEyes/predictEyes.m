@@ -10,6 +10,9 @@ function [label, scores] = predictEyes(pred, image, dims, rectSize)
     end
     
     Tbl = joinFeaturesEyes(subImages, []);
+    % Tbl = Tbl * ev;
+    % Tbl = Tbl(:, 1:num);
+    
     [label, scores] = predict(pred, Tbl);
 end
 

@@ -1,6 +1,9 @@
 % Clear all workSpace
 clearvars
 
+% Development
+rng(1710);
+
 % Global variables
 path = strcat(pwd, '/dataset/');
 dimensions = struct(    ...
@@ -13,5 +16,5 @@ dimensions = struct(    ...
 
 % Phases
 dataExtraction
-% prediction
+%prediction
 % results

@@ -1,5 +1,5 @@
 function [classifier] = randomForest(Tbl, Labels)
-    nTrees = round(10 .^ (0:0.2:3));
+    nTrees = round(10 .^ (0:0.2:2.2));
     
     classifiers = cell(length(nTrees), 1);
     OOBs = zeros(length(nTrees), 1);
@@ -13,7 +13,7 @@ function [classifier] = randomForest(Tbl, Labels)
             'Options', statset('UseParallel', true));
     
         OOBs(i) = oobError(classifiers{i}, 'Mode', 'ensemble');
-        if OOBs(i) < 0.01 && (i > 1 && abs(OOBs(i - 1) - OOBs(i) < 0.01))
+        if OOBs(i) < 0.01 || (i > 1 && abs(OOBs(i - 1) - OOBs(i) < 0.005))
             OOB = OOBs(i);
             break;
         end
