@@ -1,7 +1,10 @@
 function [classifier] = knn(Tbl, Labels, K, Dist)
     if K == -1 || Dist == ''
-        neighbours = [5, 9, 11, 13, 15];
-        distances = ["euclidean", "seuclidean", "mahalanobis"];
+        neighbours = [3, 5, 7, 9, 11, 13];
+        distances = [           ...
+            string(euclidean),  ...
+            string(seuclidean), ...
+            string(mahalanobis)];
 
         classifiers = cell(length(neighbours), length(distances));
         errors = zeros(length(neighbours), length(distances));

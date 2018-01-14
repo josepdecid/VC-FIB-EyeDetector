@@ -1,14 +1,16 @@
-for i = 1:100
+nIms = length(testImages);
+
+for i = 1:nIms
     eyesPos = vec2mat(predictedPositions(i, :), 2);
     dist = pdist(eyesPos, 'euclidean');
     rectSize = 0.65 * dist;
     halfSize = rectSize / 2;
     eyesPos = eyesPos - halfSize;
     
-    color = 'red';
-    if looksPrediction(i) == 1
-        color = 'green';
-    end
+    % color = 'red';
+    % if looksPrediction(i) == 1
+    %     color = 'green';
+    % end
 
     I = uint8(squeeze(testImages(:, :, i)));
     shape = [eyesPos(1, 1), eyesPos(1, 2), rectSize, rectSize];

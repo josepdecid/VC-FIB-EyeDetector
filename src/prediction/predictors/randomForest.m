@@ -22,12 +22,12 @@ function [classifier] = randomForest(Tbl, Labels, nTree)
         end
 
         if OOB == -1
-           [OOB, i] = min(OOBs);
+           [~, i] = min(OOBs);
         end
         classifier = classifiers{i};
 
         i = min(i + 1, length(nTrees));
-        figure; plot(nTrees(1:i), OOB, '-o');
+        figure; plot(nTrees(1:i), OOBs(1:i), '-o');
     else
         classifier = TreeBagger(        ...
             nTree, Tbl, Labels,         ...
