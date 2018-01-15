@@ -13,6 +13,6 @@ function [classifier] = trainPredictorEyes(eyes, noEyes)
     % end
     % Tbl = scores(:, 1:i);
     
-    classifier = randomForest(Tbl, Labels', 63);
+    classifier = knn(Tbl, Labels', 5, 'seuclidean');
 end
 

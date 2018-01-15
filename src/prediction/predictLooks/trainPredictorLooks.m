@@ -5,6 +5,6 @@ function [pred] = trainPredictorLooks(looks, noLooks)
     LabelsNoLooks = repmat('N', 1, length(noLooks));
     Labels = horzcat(LabelsLooks, LabelsNoLooks);
     
-    pred = TreeBagger(100, Tbl, Labels');
+    pred = svm(Tbl, Labels', 0.28065, 0.001143);
 end
 

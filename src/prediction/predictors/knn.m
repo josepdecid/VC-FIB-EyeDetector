@@ -1,5 +1,5 @@
 function [classifier] = knn(Tbl, Labels, K, Dist)
-    if K == -1 || Dist == ''
+    if K == -1 || isempty(Dist)
         neighbours = [3, 5, 7, 9, 11, 13];
         distances = [           ...
             string(euclidean),  ...
