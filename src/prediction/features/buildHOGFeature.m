@@ -1,17 +1,17 @@
-function [Tbl] = buildHOGFeature(imageSet1, imageSet2)
-    cs = [8, 8];
-    totalLength = size(imageSet1, 3) + length(imageSet2);
+function [Tbl] = buildHOGFeature(set1, set2)
+    cs = [11, 11];
+    nb = 15;
+    totalLength = size(set1, 3) + length(set2);
     
-    hog1 = extractHOGFeatures(imageSet1(:, :, 1), 'CellSize', cs);
-    Tbl = zeros([totalLength, length(hog1)]);
-    Tbl(1, :) = hog1;
+    hog = extractHOGFeatures(set1(:, :, 1), 'CellSize', cs, 'NumBins', nb);
+    Tbl = zeros([totalLength, length(hog)]);
+    Tbl(1, :) = hog;
     
-    for i = 2:size(imageSet1, 3)
-       Tbl(i, :) = extractHOGFeatures(imageSet1(:, :, i), 'CellSize', cs);
+    for i = 2:size(set1, 3)
+       Tbl(i, :) = extractHOGFeatures(set1(:, :, i), 'CellSize', cs, 'NumBins', nb);
     end
-    for i = 1:length(imageSet2)
-       Tbl(i + size(imageSet1, 3), :) = extractHOGFeatures(...
-            imageSet2(:, :, i), 'CellSize', cs);
+    for i = 1:length(set2)
+       Tbl(i + size(set1, 3), :) = extractHOGFeatures(set2(:, :, i), 'CellSize', cs, 'NumBins', nb);
     end
 end
 
