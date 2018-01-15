@@ -1,6 +1,6 @@
 function [Tbl] = buildHOGFeature(set1, set2)
-    cs = [11, 11];
-    nb = 15;
+    cs = [22, 22];
+    nb = 16;
     totalLength = size(set1, 3) + length(set2);
     
     hog = extractHOGFeatures(set1(:, :, 1), 'CellSize', cs, 'NumBins', nb);

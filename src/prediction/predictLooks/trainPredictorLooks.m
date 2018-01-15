@@ -5,6 +5,6 @@ function [pred] = trainPredictorLooks(looks, noLooks)
     LabelsNoLooks = repmat('N', 1, length(noLooks));
     Labels = horzcat(LabelsLooks, LabelsNoLooks);
     
-    pred = svm(Tbl, Labels', 0.28065, 0.001143);
+    pred = randomForest(Tbl, Labels', 63);
 end
 

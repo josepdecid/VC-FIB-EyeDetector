@@ -1,13 +1,12 @@
 rng(1710);
 predEyes = trainPredictorEyes(eyes, noEyes);
-%predLooks = trainPredictorLooks(looks, noLooks);
+predLooks = trainPredictorLooks(looks, noLooks);
 
 rectSize = 30;
 
 testImages = testset{1};
 testEyesPos = testset{2};
 testEyesLook = testset{3};
-predictedPositions = zeros(100, 4);
 looksPrediction = zeros(100, 1);
 
 % Get test set eyes and noEyes and test
@@ -53,6 +52,18 @@ end
 accuracyPos = sum(diag(confPos)) / sum(sum(confPos));
 accuracyPosF1 = 2 / sum(1 ./ (diag(confPos) ./ sum(confPos, 2)));
 
+% Detect is looking
+confLook = zeros(2, 2);
+for i = 1:length(testImages)
+    disp(i);
+    
+    looksPrediction(i, :) = predictLooks(predLooks, testImages(:, :, i), ...
+        testEyesPos(i, :), dimensions);
+    confLook = getMatrixFromLooks(confLook, looksPrediction(i, :), testEyesLook(i));
+end
+
+accuracyLook = sum(diag(confLook)) / sum(sum(confLook));
+accuracyLookF1 = 2 / sum(1 ./ (diag(confLook) ./ sum(confLook, 2)));
 
 %{
 for i = 1:100
