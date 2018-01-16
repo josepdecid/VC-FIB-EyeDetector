@@ -7,7 +7,7 @@ rectSize = 30;
 testImages = testset{1};
 testEyesPos = testset{2};
 testEyesLook = testset{3};
-looksPrediction = zeros(100, 1);
+looksPrediction = zeros(length(testImages), 1);
 predictedPositions = zeros(length(testImages), 4);
 
 % Get test set eyes and noEyes and test

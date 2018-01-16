@@ -13,6 +13,6 @@ function [classifier] = trainPredictorEyes(eyes, noEyes)
     % end
     % Tbl = scores(:, 1:i);
     
-    classifier = svm(Tbl, Labels', 4.5384, 1.6061);
+    classifier = randomForest(Tbl, Labels', 63);
 end
 
